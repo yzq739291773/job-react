@@ -18,6 +18,7 @@ const store = createStore(counter, compose(
 
 // 1.react 原始代码
 
+
 { /* ReactDOM.render( < App / > , document.getElementById('root')); */ }
 
 // 2.手动连接react和redux
