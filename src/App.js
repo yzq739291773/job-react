@@ -5,6 +5,13 @@ import { counter, addGun, removeGun, addGunAsync } from './index.redux'
 import logo from './logo.svg';
 import './App.css';
 
+const mapStatetoProps = (state)=>{
+  return {num:state}
+}
+const actionCreaters = {counter, addGun, removeGun, addGunAsync}
+
+// 装饰器配置失败
+// @connect(mapStatetoProps, actionCreaters)
 class App extends Component {
   render() {
     return (
@@ -20,9 +27,6 @@ class App extends Component {
     );
   }
 }
-const mapStatetoProps = (state)=>{
-  return {num:state}
-}
-const actionCreaters = {counter, addGun, removeGun, addGunAsync}
+
 App = connect(mapStatetoProps, actionCreaters)(App)
 export default App;
