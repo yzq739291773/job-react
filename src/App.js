@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {addGun, removeGun} from './index.redux'
 
 class App extends Component {
   render() {
+    const store = this.props.store
+    const num = store.getState()
+    console.log('app的props',this.props)
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React111
-          </a>
+          <h1>当前武器数量{num}</h1>
+          <button onClick={()=>{store.dispatch(addGun())}}>申请武器</button>
+          <button onClick={()=>{store.dispatch(removeGun())}}>上交武器</button>
         </header>
       </div>
     );
