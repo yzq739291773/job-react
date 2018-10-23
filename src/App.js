@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 import { counter, addGun, removeGun, addGunAsync } from './index.redux'
 import logo from './logo.svg';
@@ -13,6 +14,16 @@ const actionCreaters = {counter, addGun, removeGun, addGunAsync}
 // 装饰器配置失败
 // @connect(mapStatetoProps, actionCreaters)
 class App extends Component {
+  componentDidMount(){
+    console.log('app组件挂载成功')
+    axios.get('/hello')
+      .then(res=>{
+        console.log('请求成功',res)
+      })
+      .catch(err=>{
+        console.log('请求失败',err)
+      })
+  }
   render() {
     return (
       <div className="App">
