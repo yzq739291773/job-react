@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 // import { addGun, removeGun, addGunAsync } from './index.redux'
 import { counter } from './index.redux'
+import './config'
 
 const store = createStore(counter, compose(
     applyMiddleware(thunk),
