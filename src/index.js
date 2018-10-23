@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import demo_redux from './demo/demo-redux.js'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-// import { addGun, removeGun, addGunAsync } from './index.redux'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+
+import Login from './component/login/login.jsx'
+import Register from './component/register/register.jsx'
+
 import { counter } from './index.redux'
 import './config'
 
@@ -16,32 +19,15 @@ const store = createStore(counter, compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 
-// 1.react 原始代码
-
-
-{ /* ReactDOM.render( < App / > , document.getElementById('root')); */ }
-
-// 2.手动连接react和redux
-
-// function render() {
-//     ReactDOM.render( <
-//         App store = { store }
-//         addGun = { addGun }
-//         removeGun = { removeGun }
-//         addGunAsync = { addGunAsync }
-//         / > , document.getElementById('root'));
-//     }
-
-//     render()
-//     store.subscribe(render)
-
-// 3.利用react-redux插件连接redux和react
-ReactDOM.render( <
-    Provider store = { store } >
-    <
-    App / >
-    <
-    /Provider>, document.getElementById('root')
+ReactDOM.render( 
+    <Provider store = { store } >
+        <BrowserRouter >
+            <div>
+                <Route path='/login' component={Login}></Route>
+                <Route path='/register' component={Register}></Route>
+            </div>
+        </BrowserRouter>
+    </Provider>, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
