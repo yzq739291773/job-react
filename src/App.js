@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {addGun, removeGun} from './index.redux'
 
 class App extends Component {
   render() {
     const store = this.props.store
+    const addGun = this.props.addGun
+    const removeGun = this.props.removeGun
     const num = store.getState()
     console.log('app的props',this.props)
     return (
