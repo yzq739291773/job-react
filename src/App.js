@@ -7,6 +7,7 @@ class App extends Component {
     const store = this.props.store
     const addGun = this.props.addGun
     const removeGun = this.props.removeGun
+    const addGunAsync = this.props.addGunAsync
     const num = store.getState()
     console.log('app的props',this.props)
     return (
@@ -16,6 +17,7 @@ class App extends Component {
           <h1>当前武器数量{num}</h1>
           <button onClick={()=>{store.dispatch(addGun())}}>申请武器</button>
           <button onClick={()=>{store.dispatch(removeGun())}}>上交武器</button>
+          <button onClick={()=>{store.dispatch(addGunAsync())}}>拖两天再给</button>
         </header>
       </div>
     );
