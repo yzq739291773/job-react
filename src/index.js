@@ -7,8 +7,8 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
-import Login from './component/login/login.jsx'
-import Register from './component/register/register.jsx'
+import Login from './container/login/login.jsx'
+import Register from './container/register/register.jsx'
 
 import reducers from './reducer.js'
 import './config'
