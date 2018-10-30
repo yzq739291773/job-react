@@ -6,12 +6,21 @@ class Login extends React.Component{
     constructor(props){
         super(props)
         this.state={
-
+            user:'',
+            pwd:'',
         }
     }
     register(){
         console.log('注册',this.props)
         this.props.history.push('/register');
+    }
+    login(){
+        console.log(this.state)
+    }
+    handChange(key, val){
+        this.setState({
+            [key]:val
+        })
     }
     render(){
         return(
@@ -19,12 +28,12 @@ class Login extends React.Component{
                 <Logo></Logo>
                 <WingBlank>
                     <List>
-                        <InputItem>用户</InputItem>
+                        <InputItem onChange={val=>this.handChange('user',val)}>用户</InputItem>
                         <WhiteSpace />
-                        <InputItem>密码</InputItem>
+                        <InputItem type="password" onChange={val=>this.handChange('pwd',val)}>密码</InputItem>
                         <WhiteSpace />
                     </List>
-                    <Button type="primary">登录</Button>
+                    <Button onClick={()=>this.login()} type="primary">登录</Button>
                     <WhiteSpace />
                     <Button onClick={()=>this.register()} type="primary">注册</Button>
                     <WhiteSpace />

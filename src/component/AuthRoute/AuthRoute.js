@@ -14,11 +14,12 @@ class AuthRoute extends React.Component{
         }
         axios.get('/user/info')
             .then((res)=>{
+                console.log(res)
                 if(res.status == 200){
-                    if(res.code == 0){
-                        console.log(this.props)
+                    if(res.data.code == 0){
+                        console.log('登录')
                     }else{
-                        console.log(this.props)
+                        console.log('未登录',this.props)
                         this.props.history.push('/login')
                     }
                 }

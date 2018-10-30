@@ -1,6 +1,6 @@
 exports.getUserInfo = async(ctx, next) => {
     ctx.body = {
-        code: 0,
+        code: 1,
         message: '用户信息'
     }
 }

@@ -6,11 +6,19 @@ class Register extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+            user:'',
+            pwd:'',
+            repeatpwd:'',
             type:"boss"
         }
     }
     handRegister(){
-        console.log('注册成功')
+        console.log(this.state)
+    }
+    handChange(key, val){
+        this.setState({
+            [key]:val
+        })
     }
     render(){
         const RadioItem = Radio.RadioItem;
@@ -19,17 +27,19 @@ class Register extends React.Component{
                 <Logo></Logo>
                 <WingBlank>
                     <List>
-                        <InputItem>用户</InputItem>
+                        <InputItem onChange={val=>this.handChange('user',val)}>用户</InputItem>
                         <WhiteSpace />
-                        <InputItem>密码</InputItem>
+                        <InputItem type="password" onChange={val=>this.handChange('pwd',val)}>密码</InputItem>
                         <WhiteSpace />
-                        <InputItem>确认密码</InputItem>
+                        <InputItem type="password" onChange={val=>this.handChange('repeatpwd',val)}>确认密码</InputItem>
                         <WhiteSpace />
-                        <RadioItem checked={this.state.type=='genius'}>
+                        <RadioItem checked={this.state.type=='genius'}
+                                    onChange={val=>this.handChange('type','genius')}>
                             牛人
                         </RadioItem>
                         <WhiteSpace />
-                        <RadioItem checked={this.state.type=='boss'}>
+                        <RadioItem checked={this.state.type=='boss'}
+                                    onChange={val=>this.handChange('type','boss')}>
                             boss
                         </RadioItem>
                     </List>
