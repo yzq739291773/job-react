@@ -1,6 +1,6 @@
 module.exports = async(ctx, next) => {
     ctx.body = {
-        code: 200,
+        code: 0,
         message: 'hello'
     }
 }
