@@ -1,7 +1,13 @@
 import React from 'react'
 import { Button, WhiteSpace, WingBlank, List, InputItem, Radio } from 'antd-mobile';
 import Logo from '../../component/logo/logo'
+import {connect} from 'react-redux'
+import {register} from '../../redux/user.redux'
 
+const mapStatetoProps = (state)=>{
+    return {user:state.user}
+}
+const actionCreaters = {register}
 class Register extends React.Component{
     constructor(props){
         super(props)
@@ -13,7 +19,7 @@ class Register extends React.Component{
         }
     }
     handRegister(){
-        console.log(this.state)
+        this.props.register(this.state)
     }
     handChange(key, val){
         this.setState({
@@ -27,18 +33,19 @@ class Register extends React.Component{
                 <Logo></Logo>
                 <WingBlank>
                     <List>
+                        {this.props.user.msg?<p className='error-msg'>{this.props.user.msg}</p>:null}
                         <InputItem onChange={val=>this.handChange('user',val)}>用户</InputItem>
                         <WhiteSpace />
                         <InputItem type="password" onChange={val=>this.handChange('pwd',val)}>密码</InputItem>
                         <WhiteSpace />
                         <InputItem type="password" onChange={val=>this.handChange('repeatpwd',val)}>确认密码</InputItem>
                         <WhiteSpace />
-                        <RadioItem checked={this.state.type=='genius'}
-                                    onChange={val=>this.handChange('type','genius')}>
+                        <RadioItem checked={this.state.type==='genius'}
+                                onChange={val=>this.handChange('type','genius')}>
                             牛人
                         </RadioItem>
                         <WhiteSpace />
-                        <RadioItem checked={this.state.type=='boss'}
+                        <RadioItem checked={this.state.type==='boss'}
                                     onChange={val=>this.handChange('type','boss')}>
                             boss
                         </RadioItem>
@@ -51,4 +58,5 @@ class Register extends React.Component{
     }
 }
 
+Register = connect(mapStatetoProps, actionCreaters)(Register)
 export default Register
