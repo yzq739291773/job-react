@@ -88,7 +88,8 @@ exports.register = async(ctx, next) => {
 }
 
 exports.getList = async(ctx, next) => {
-    await User.find({}, (err, doc) => {
+    const { type } = ctx.query
+    await User.find({type}, (err, doc) => {
         if (err) {
             ctx.body = {
                 code: 1,
