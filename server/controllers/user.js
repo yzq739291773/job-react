@@ -28,6 +28,24 @@ exports.getUserInfo = async(ctx, next) => {
     }
 
 }
+exports.update = async(ctx, next)=>{
+    const userid = ctx.cookies.get('userid')
+    if (!userid) {
+		ctx.body = {
+            code: 1,
+            msg: '后台出错了'
+        }
+	}
+    const body = ctx.request.body
+    console.log(0,body)
+	await User.findByIdAndUpdate(userid,body,function(err,doc){
+		const data = Object.assign({},{
+			user:doc.user,
+			type:doc.type
+        },body)
+        ctx.body = {code:0,data}
+	})
+}
 exports.login = async(ctx, next) => {
     console.log('登录接口')
     const { user, pwd } = ctx.request.body
@@ -54,69 +72,19 @@ exports.register = async(ctx, next) => {
     try {
         let res = await tool.findone(User, { user })
         let data = await tool.create(User, { user, type, pwd: md5pwd(pwd) })
-        ctx.cookies.set('userid', doc._id)
+        ctx.cookies.set('userid', data._id)
         ctx.body = {
             code: 0,
             msg: '注册成功'
         }
+        
     } catch (error) {
+        console.log('注册',error)
         ctx.body = {
             code: 1,
             msg: '用户名已存在'
         }
     }
-
-    // await User.findOne({ user }, async(err, doc) => {
-    //     if (doc) {
-    //         console.log(2)
-    //         ctx.body = {
-    //             code: 1,
-    //             msg: '用户名已存在'
-    //         }
-    //         return false
-    //     } else {
-    //         console.log(3)
-    //             await User.create({ user, type, pwd }, (err, doc) => {
-    //                 if (!err) {
-    //                     console.log(4)
-    //                     ctx.body = {
-    //                         code: 0,
-    //                         msg: 'success'
-    //                     }
-    //                 } else {
-    //                     console.log(5)
-    //                     ctx.body = {
-    //                         code: 1,
-    //                         msg: '存储失败'
-    //                     }
-    //                 }
-
-    //         })
-
-
-    //         const userDoc = new User({ user, type, pwd })
-    //         await userDoc.save((e, d) => {
-    //             console.log(5)
-    //             if (e) {
-    //                 console.log(6)
-    //                 ctx.body = {
-    //                     code: 1,
-    //                     msg: '后端出错了'
-    //                 }
-    //                 return false
-    //             } else {
-    //                 console.log(7)
-    //                 ctx.body = {
-    //                     code: 0,
-    //                     msg: 'success'
-    //                 }
-    //             }
-
-    //         })
-    //     }
-
-
-    // })
 }
 
 exports.getList = async(ctx, next) => {

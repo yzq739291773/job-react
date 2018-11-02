@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route} from 'react-router-dom'
 
 import Login from './container/login/login.jsx'
 import Register from './container/register/register.jsx'
@@ -13,6 +13,7 @@ import AuthRoute from './component/AuthRoute/AuthRoute'
 import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import Boss from './container/boss/boss'
+import Genius from './container/genius/genius'
 
 import reducers from './reducer.js'
 import './config'
@@ -32,6 +33,7 @@ ReactDOM.render(
                 <Route path='/bossinfo' component={BossInfo}></Route>
                 <Route path='/geniusinfo' component={GeniusInfo}></Route>
                 <Route path='/boss' component={Boss}></Route>
+                <Route path='/genius' component={Genius}></Route>
             </div>
         </BrowserRouter>
     </Provider>, document.getElementById('root')

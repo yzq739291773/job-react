@@ -32,6 +32,7 @@ class AvatarSelector extends React.Component{
 						onClick={elm=>{
                             console.log(11,elm)
                             this.setState(elm)
+                            this.props.selectAvatar(elm.text)
 						}}
 					/>					
 				</List>

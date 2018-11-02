@@ -3,7 +3,7 @@ import { Button, WhiteSpace, WingBlank, List, InputItem, Radio } from 'antd-mobi
 import Logo from '../../component/logo/logo'
 import {connect} from 'react-redux'
 import {register} from '../../redux/user.redux'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 
 const mapStatetoProps = (state)=>{
     return {user:state.user}

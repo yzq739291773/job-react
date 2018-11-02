@@ -1,6 +1,14 @@
 import React from 'react'
 import {NavBar,InputItem, TextareaItem, Button} from 'antd-mobile'
 import AvatarSelector from '../../component/avatar-selector/avatar-selector'
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {update} from '../../redux/user.redux'
+
+const mapStatetoProps = (state)=>{
+    return {user:state.user}
+}
+const actionCreaters = {update}
 
 class BossInfo extends React.Component{
     constructor(props){
@@ -18,8 +26,11 @@ class BossInfo extends React.Component{
 		})
 	}
     render(){
+        const path = this.props.location.pathname
+		const redirect = this.props.user.redirectTo
         return(
             <div>
+                {redirect&&redirect!==path? <Redirect to={this.props.user.redirectTo}></Redirect> :null}
                 <NavBar mode="dark" >BOSS完善信息页</NavBar>
                 <AvatarSelector 
 					selectAvatar={(imgname)=>{
@@ -47,7 +58,7 @@ class BossInfo extends React.Component{
 				</TextareaItem>
 				<Button 
 					onClick={()=>{
-						// this.props.update(this.state)
+						this.props.update(this.state)
 					}}
 					type='primary'>保存</Button>
             </div>
@@ -55,4 +66,5 @@ class BossInfo extends React.Component{
     }
 }
 
+BossInfo = connect(mapStatetoProps, actionCreaters)(BossInfo)
 export default BossInfo

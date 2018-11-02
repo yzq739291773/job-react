@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 const mapStatetoProps = (state) => {
-    return null
+    return {}
 }
 const actionCreaters = { loadData }
 class AuthRoute extends React.Component {

@@ -9,5 +9,6 @@ router.get('/user/info', controllers.user.getUserInfo)
 router.get('/user/list', controllers.user.getList)
 router.post('/user/register', controllers.user.register)
 router.post('/user/login', controllers.user.login)
+router.post('/user/update', controllers.user.update)
 
 module.exports = router
