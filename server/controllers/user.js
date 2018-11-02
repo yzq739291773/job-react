@@ -2,6 +2,7 @@ const model = require('../model')
 const User = model.getModel('user')
 const tool = require('../tool/too')
 const utils = require('utility')
+const _filter = { 'pwd': 0, '__v': 0 }
 
 exports.getUserInfo = async(ctx, next) => {
     ctx.response.status = 200,
@@ -10,7 +11,24 @@ exports.getUserInfo = async(ctx, next) => {
             msg: '用户信息'
         }
 }
-
+exports.login = async(ctx, next) => {
+    console.log('登录接口')
+    const { user, pwd } = ctx.request.body
+    await User.findOne({ user, pwd: md5pwd(pwd) }, _filter, function(err, doc) {
+        console.log(err, doc)
+        if (!doc) {
+            ctx.body = {
+                code: 1,
+                msg: '用户名或者密码错误'
+            }
+        } else {
+            ctx.body = {
+                code: 0,
+                data: doc
+            }
+        }
+    })
+}
 exports.register = async(ctx, next) => {
 
     console.log(111, ctx)

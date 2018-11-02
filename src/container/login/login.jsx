@@ -2,6 +2,14 @@ import React from 'react'
 import { Button, WhiteSpace, WingBlank, List, InputItem } from 'antd-mobile';
 import Logo from '../../component/logo/logo'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {login} from '../../redux/user.redux'
+import { Route, Redirect, Switch } from 'react-router-dom'
+
+const mapStatetoProps = (state)=>{
+    return {user:state.user}
+}
+const actionCreaters = {login}
 
 class Login extends React.Component{
     constructor(props){
@@ -16,10 +24,8 @@ class Login extends React.Component{
         this.props.history.push('/register');
     }
     login(){
-        console.log(this.state)
-        axios.get('/user/info').then(res=>{
-            console.log(res)
-        })
+        console.log('登录',this.props)
+        this.props.login(this.state)
     }
     handChange(key, val){
         this.setState({
@@ -29,9 +35,11 @@ class Login extends React.Component{
     render(){
         return(
             <div>
+                {this.props.user.redirectTo ? <Redirect to={this.props.user.redirectTo} />:null}
                 <Logo></Logo>
                 <WingBlank>
                     <List>
+                        {this.props.user.msg?<p className='error-msg'>{this.props.user.msg}</p>:null}   
                         <InputItem onChange={val=>this.handChange('user',val)}>用户</InputItem>
                         <WhiteSpace />
                         <InputItem type="password" onChange={val=>this.handChange('pwd',val)}>密码</InputItem>
@@ -47,4 +55,5 @@ class Login extends React.Component{
     }
 }
 
+Login = connect(mapStatetoProps, actionCreaters)(Login)
 export default Login
