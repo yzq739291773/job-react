@@ -9,6 +9,10 @@ app.use(bodyParser())
 const router = require('./routes')
 app.use(router.routes())
 
+app.on('error', (err, ctx) =>
+    console.error('server error', err)
+);
+
 app.listen(9093, () => {
     console.log('server start at port 9093')
 })

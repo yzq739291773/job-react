@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, WhiteSpace, WingBlank, List, InputItem } from 'antd-mobile';
 import Logo from '../../component/logo/logo'
+import axios from 'axios'
 
 class Login extends React.Component{
     constructor(props){
@@ -16,6 +17,9 @@ class Login extends React.Component{
     }
     login(){
         console.log(this.state)
+        axios.get('/user/info').then(res=>{
+            console.log(res)
+        })
     }
     handChange(key, val){
         this.setState({
