@@ -1,6 +1,7 @@
 const model = require('../model')
 const User = model.getModel('user')
 const tool = require('../tool/too')
+const utils = require('utility')
 
 exports.getUserInfo = async(ctx, next) => {
     ctx.response.status = 200,
@@ -16,7 +17,7 @@ exports.register = async(ctx, next) => {
     const { user, pwd, type } = ctx.request.body
     try {
         let res = await tool.findone(User, { user })
-        let data = await tool.create(User, { user, type, pwd })
+        let data = await tool.create(User, { user, type, pwd: md5pwd(pwd) })
         ctx.body = {
             code: 0,
             msg: '注册成功'
@@ -96,4 +97,9 @@ exports.getList = async(ctx, next) => {
         }
     })
 
+}
+
+function md5pwd(pwd) {
+    const salt = 'Yzq@!'
+    return utils.md5(utils.md5(pwd + salt))
 }
