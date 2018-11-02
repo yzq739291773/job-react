@@ -5,11 +5,28 @@ const utils = require('utility')
 const _filter = { 'pwd': 0, '__v': 0 }
 
 exports.getUserInfo = async(ctx, next) => {
-    ctx.response.status = 200,
+    const userid = ctx.cookies.get('userid')
+    if (!userid) {
         ctx.body = {
-            code: 0,
-            msg: '用户信息'
+            code: 1,
         }
+    } else {
+        await User.findOne({ _id: userid }, _filter, (err, doc) => {
+            console.log(err, doc)
+            if (err) {
+                ctx.body = {
+                    code: 1,
+                    msg: '后台出错了'
+                }
+            } else {
+                ctx.body = {
+                    code: 0,
+                    data: doc
+                }
+            }
+        })
+    }
+
 }
 exports.login = async(ctx, next) => {
     console.log('登录接口')
@@ -22,6 +39,7 @@ exports.login = async(ctx, next) => {
                 msg: '用户名或者密码错误'
             }
         } else {
+            ctx.cookies.set('userid', doc._id)
             ctx.body = {
                 code: 0,
                 data: doc
@@ -36,6 +54,7 @@ exports.register = async(ctx, next) => {
     try {
         let res = await tool.findone(User, { user })
         let data = await tool.create(User, { user, type, pwd: md5pwd(pwd) })
+        ctx.cookies.set('userid', doc._id)
         ctx.body = {
             code: 0,
             msg: '注册成功'
