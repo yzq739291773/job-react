@@ -5,12 +5,11 @@ import {Switch, Route} from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
 import Genius from '../../component/genius/genius'
+import User from '../../component/user/user'
 function Msg(){
 	return <h2>消息列表页面</h2>
 }
-function User(){
-	return <h2>个人中心页面</h2>
-}
+
 
 const mapStatetoProps = (state)=>{
     return {user:state.user}
@@ -53,7 +52,9 @@ class Dashboard extends React.Component{
 				component:User
 			}
 		]
-
+		console.log('dashboard.js',navList)
+		console.log('dashboard.js',pathname)
+		console.log('dashboard.js',navList.find(v=>v.path===pathname))
 
 		return (
 			<div>
@@ -66,7 +67,7 @@ class Dashboard extends React.Component{
 						</Switch>
 				</div>
 
-				<NavLinkBar data={navList}></NavLinkBar>
+				<NavLinkBar style={{height:45}}  data={navList}></NavLinkBar>
 				
 			</div>
 		)
