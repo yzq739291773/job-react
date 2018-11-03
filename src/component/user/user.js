@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Result, List,Brief,WhiteSpace,Modal, Button} from 'antd-mobile'
-import browserCookie from 'browser-cookies'
+import reactCookie from 'react-cookies'
 import {logoutSubmit} from '../../redux/user.redux'
 import {Redirect} from 'react-router-dom'
 
@@ -20,7 +20,7 @@ class User extends React.Component{
 		alert('注销', '确认退出登录吗???', [
 		      { text: '取消', onPress: () => console.log('cancel') },
 		      { text: '确认', onPress: () => {
-		      	browserCookie.erase('userid')
+				reactCookie.remove('userid')
 		      	this.props.logoutSubmit()
 		      }}
 		    ])
