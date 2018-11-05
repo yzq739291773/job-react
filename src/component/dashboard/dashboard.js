@@ -7,7 +7,7 @@ import Boss from '../../component/boss/boss'
 import Genius from '../../component/genius/genius'
 import User from '../../component/user/user'
 function Msg(){
-	return <h2>消息列表页面</h2>
+	return <h2>消息列表页面1</h2>
 }
 
 
@@ -52,29 +52,24 @@ class Dashboard extends React.Component{
 				component:User
 			}
 		]
-		console.log('dashboard.js',navList)
-		console.log('dashboard.js',pathname)
-		console.log('dashboard.js',navList.find(v=>v.path===pathname))
-
 		return (
+			
 			<div>
 				<NavBar className='fixd-header' mode='dard'>{navList.find(v=>v.path===pathname).title}</NavBar>
 				<div style={{marginTop:45}}>
 						<Switch>
 							{navList.map(v=>(
-								<Route key={v.path} path={v.path} component={v.component}></Route>
+							
+								<Route key={v.path} path={v.path} component={v.component}>
+									{console.log(v)}
+								</Route>
 							))}
 						</Switch>
 				</div>
-
 				<NavLinkBar style={{height:45}}  data={navList}></NavLinkBar>
-				
 			</div>
 		)
-
-		
 	}
-
 }
 
 Dashboard = connect(mapStatetoProps, actionCreaters)(Dashboard)

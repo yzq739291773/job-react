@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {Result, List,Brief,WhiteSpace,Modal, Button} from 'antd-mobile'
 import reactCookie from 'react-cookies'
 import {logoutSubmit} from '../../redux/user.redux'
-import {Redirect} from 'react-router-dom'
 
 const mapStatetoProps = (state)=>{
     return {user:state.user}
@@ -12,6 +11,7 @@ const actionCreaters = {logoutSubmit}
 class User extends React.Component{
 	constructor(props){
 		super(props)
+
 	}
 	logout(){
 		console.log('注销')
@@ -30,7 +30,6 @@ class User extends React.Component{
 		const props = this.props
 		const Item = List.Item
 		const Brief = Item.Brief
-		console.log(props)
 		return props.user.user?(
 			<div>
 				<Result
@@ -55,10 +54,10 @@ class User extends React.Component{
 					{/* <Item >退出登录</Item> */}
 				{/* </List> */}
 			</div>
-		):<Redirect to={props.user.redirectTo} />
+		):null
 
 	}
 }
-
+{/* <Redirect to={props.user.redirectTo} /> */}
 User = connect(mapStatetoProps, actionCreaters)(User)
 export default User
