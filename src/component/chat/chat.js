@@ -50,9 +50,6 @@ class Chat extends React.Component{
 										.split(' ')
 										.filter(v=>v)
         								.map(v=>({text:v}))
-        // const emoji = 'a b c d'.split(' ')
-		// 								.filter(v=>v)
-        // 								.map(v=>({text:v}))
 
 		const userid = this.props.match.params.user
 		const Item = List.Item

@@ -110,18 +110,13 @@ exports.getmsglist = async (ctx,next)=>{
     console.log('getmsglist')
     const user = ctx.cookies.get('userid')
     try {
-        console.log('11')
         let users = {}
-        console.log('22')
         let userdoc = await tool.find(User,{})
-        console.log('33')
         console.log('getmsglist,userdoc',userdoc)
         userdoc.forEach(v=>{
 			users[v._id] = {name:v.user, avatar:v.avatar}
         })
-        console.log('44')
         let doc = await tool.find(Chat,{'$or':[{from:user},{to:user}]})
-        console.log('getmsglist,doc',doc)
         ctx.body = {
             code: 0,
             msgs:doc,
@@ -134,6 +129,24 @@ exports.getmsglist = async (ctx,next)=>{
             msg:'服务器错误'
         }
     }
+}
+
+exports.readmsg = async (ctx, next)=>{
+    console.log('readmsg')
+    const userid = ctx.cookies.get('userid')
+	const {from} = ctx.request.body
+	await Chat.update(
+		{from,to:userid},
+		{'$set':{read:true}},
+		{'multi':true},
+		function(err,doc){
+		console.log('aaa',doc,err)
+		if (!err) {
+            ctx.body = {code:0,num:doc.nModified}
+            return false;
+		}
+		ctx.body = {code:1,msg:'修改失败'}
+	})
 }
 
 function md5pwd(pwd) {

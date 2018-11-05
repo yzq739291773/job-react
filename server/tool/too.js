@@ -19,10 +19,10 @@ exports.findone = (model, obj) => {
     return new Promise((resolve, reject) => {
         model.findOne(obj, (err, doc) => {
             if (doc) {
-                console.log(2, doc)
+                // console.log(2, doc)
                 reject(err)
             } else {
-                console.log(1, err)
+                // console.log(1, err)
                 resolve(err)
             }
         })
@@ -33,10 +33,10 @@ exports.find = (model, obj) => {
     return new Promise((resolve, reject) => {
         model.find(obj, (err, doc) => {
             if (doc) {
-                console.log(2, doc)
+                // console.log(2, doc)
                 resolve(doc)
             } else {
-                console.log(1, err)
+                // console.log(1, err)
                 reject(err)
             }
         })
