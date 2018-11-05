@@ -7,6 +7,19 @@ import {logoutSubmit} from '../../redux/user.redux'
 const mapStatetoProps = (state)=>{
     return {user:state.user}
 }
+var setCookie = function (name, value, day) {
+	       if(day !== 0){     //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+	         var expires = day * 24 * 60 * 60 * 1000;
+            var date = new Date(+new Date()+expires);
+           document.cookie = name + "=" + escape(value) + ";expires=" + date.toUTCString();
+          }else{
+            document.cookie = name + "=" + escape(value);
+         }
+	   };
+	   var delCookie = function (name) {
+		       console.log(5555)
+		       setCookie(name, ' ', -1);
+		     };  
 const actionCreaters = {logoutSubmit}
 class User extends React.Component{
 	constructor(props){
@@ -20,8 +33,11 @@ class User extends React.Component{
 		alert('注销', '确认退出登录吗???', [
 		      { text: '取消', onPress: () => console.log('cancel') },
 		      { text: '确认', onPress: () => {
-				reactCookie.remove('userid')
-		      	this.props.logoutSubmit()
+			
+				// reactCookie.remove('userid')
+				  delCookie('userid')
+				  this.props.logoutSubmit()
+				  this.props.history.push('/login');
 		      }}
 		    ])
 	}
