@@ -4,6 +4,8 @@ const bodyParser = require('koa-bodyparser')
 
 const server = require('http').Server(app.callback())
 const io = require('socket.io')(server)
+const model = require('./model')
+const Chat = model.getModel('chat')
 
 
 
@@ -19,6 +21,16 @@ app.on('error', (err, ctx) =>
 );
 io.on('connection',function(socket){
 	console.log('user login')
+	socket.on('sendmsg',function(data){
+		console.log(data)
+		const {from, to, msg} = data
+		const chatid = [from,to].sort().join('_')
+		Chat.create({chatid,from,to,content:msg},function(err,doc){
+			io.emit('recvmsg', Object.assign({},doc._doc))
+		})
+		// console.log(data)
+		// io.emit('recvmsg',data)
+	})
 })
 
 server.listen(9093, () => {

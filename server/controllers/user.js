@@ -1,5 +1,6 @@
 const model = require('../model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const tool = require('../tool/too')
 const utils = require('utility')
 const _filter = { 'pwd': 0, '__v': 0 }
@@ -103,6 +104,36 @@ exports.getList = async(ctx, next) => {
         }
     })
 
+}
+
+exports.getmsglist = async (ctx,next)=>{
+    console.log('getmsglist')
+    const user = ctx.cookies.get('userid')
+    try {
+        console.log('11')
+        let users = {}
+        console.log('22')
+        let userdoc = await tool.find(User,{})
+        console.log('33')
+        console.log('getmsglist,userdoc',userdoc)
+        userdoc.forEach(v=>{
+			users[v._id] = {name:v.user, avatar:v.avatar}
+        })
+        console.log('44')
+        let doc = await tool.find(Chat,{'$or':[{from:user},{to:user}]})
+        console.log('getmsglist,doc',doc)
+        ctx.body = {
+            code: 0,
+            msgs:doc,
+            users:users
+
+        }
+    } catch (error) {
+        ctx.body = {
+            code: 1,
+            msg:'服务器错误'
+        }
+    }
 }
 
 function md5pwd(pwd) {

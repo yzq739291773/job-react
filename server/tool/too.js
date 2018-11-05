@@ -28,3 +28,17 @@ exports.findone = (model, obj) => {
         })
     })
 }
+
+exports.find = (model, obj) => {
+    return new Promise((resolve, reject) => {
+        model.find(obj, (err, doc) => {
+            if (doc) {
+                console.log(2, doc)
+                resolve(doc)
+            } else {
+                console.log(1, err)
+                reject(err)
+            }
+        })
+    })
+}
