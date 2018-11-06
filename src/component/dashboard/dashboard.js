@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {NavBar} from 'antd-mobile'
+import PropTypes from 'prop-types'
 import {Switch, Route} from 'react-router-dom'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
@@ -15,6 +16,16 @@ const mapStatetoProps = (state)=>{
 }
 const actionCreaters = {getMsgList,recvMsg}
 class Dashboard extends React.Component{
+	// 父组件声明自己支持context
+	static childContextTypes = {
+        color: PropTypes.string,
+	}
+	// 提供一个函数，用来返回相应的context对象
+	getChildContext() {
+        return {
+            color: 'red',
+        };
+    }
 	componentDidMount(){
 		if (!this.props.state.chat.chatmsg.length) {
 			this.props.getMsgList()
