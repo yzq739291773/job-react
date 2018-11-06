@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
+import {connect} from './diyRedux/my-react-redux.js'
 import axios from 'axios'
 
 import { counter, addGun, removeGun, addGunAsync } from './index.redux'
@@ -16,13 +17,13 @@ const actionCreaters = {counter, addGun, removeGun, addGunAsync}
 class App extends Component {
   componentDidMount(){
     console.log('app组件挂载成功')
-    axios.get('/hello')
-      .then(res=>{
-        console.log('请求成功',res)
-      })
-      .catch(err=>{
-        console.log('请求失败',err)
-      })
+    // axios.get('/hello')
+    //   .then(res=>{
+    //     console.log('请求成功',res)
+    //   })
+    //   .catch(err=>{
+    //     console.log('请求失败',err)
+    //   })
   }
   render() {
     return (
