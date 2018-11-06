@@ -30,13 +30,16 @@ ReactDOM.render(
             <div>
                 <AuthRoute></AuthRoute>
                 <Switch>
+                {/* <Route path='/' component={Login}></Route> */}
                 <Route path='/login' component={Login}></Route>
+                {/* <Redirect path='/' to='/login' /> */}
                 <Route path='/register' component={Register}></Route>
                 <Route path='/bossinfo' component={BossInfo}></Route>
                 <Route path='/geniusinfo' component={GeniusInfo}></Route>
                 <Route path='/chat/:user' component={Chat}></Route>
-                {/* <Redirect path='/' to='/login' /> */}
+                
                 <Route  component={Dashboard}></Route>
+                {/* <Redirect from="/" to="/login" /> */}
               
                 </Switch>
             </div>

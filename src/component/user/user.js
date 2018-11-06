@@ -34,8 +34,8 @@ class User extends React.Component{
 		      { text: '取消', onPress: () => console.log('cancel') },
 		      { text: '确认', onPress: () => {
 			
-				// reactCookie.remove('userid')
-				  delCookie('userid')
+				reactCookie.remove('userid')
+				//   delCookie('userid')
 				  this.props.logoutSubmit()
 				  this.props.history.push('/login');
 		      }}

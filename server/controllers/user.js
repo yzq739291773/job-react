@@ -58,7 +58,7 @@ exports.login = async(ctx, next) => {
                 msg: '用户名或者密码错误'
             }
         } else {
-            ctx.cookies.set('userid', doc._id)
+            ctx.cookies.set('userid', doc._id,{maxAge:2*3600*1000})
             ctx.body = {
                 code: 0,
                 data: doc
@@ -73,7 +73,7 @@ exports.register = async(ctx, next) => {
     try {
         let res = await tool.findone(User, { user })
         let data = await tool.create(User, { user, type, pwd: md5pwd(pwd) })
-        ctx.cookies.set('userid', data._id)
+        ctx.cookies.set('userid', data._id,{maxAge:2*3600*1000})
         ctx.body = {
             code: 0,
             msg: '注册成功'
