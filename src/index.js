@@ -4,18 +4,21 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 // 测试自己写的redux
-import demo_redux from './demo/demo-redux.js'
-import { createStore, applyMiddleware, compose } from 'redux'
+// import demo_redux from './demo/demo-redux.js'
+// import { createStore, applyMiddleware, compose } from 'redux'
+import {createStore} from './diyRedux/my-redux.js'
 import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
+import { Provider } from './diyRedux/my-react-redux.js'
 // import { addGun, removeGun, addGunAsync } from './index.redux'
 import { counter } from './index.redux'
 import './config'
 
-const store = createStore(counter, compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-))
+// const store = createStore(counter, compose(
+//     applyMiddleware(thunk),
+//     window.devToolsExtension ? window.devToolsExtension() : f => f
+// ))
+const store = createStore(counter)
 
 // 1.react 原始代码
 
