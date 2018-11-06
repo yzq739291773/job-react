@@ -1,10 +1,12 @@
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
+import {createStore} from '../diyRedux/my-redux'
 
 const ADD_GUN = '加机关枪'
 const REMOVE_GUN = '减机关枪'
 
 // reducer
 const counter = (state = 0, action) => {
+    console.log(state, action)
     switch (action.type) {
         case ADD_GUN:
             return state + 1;
@@ -39,5 +41,6 @@ store.subscribe(listener)
 
 
 store.dispatch(addGun())
+console.log(store.dispatch(addGun()))
 store.dispatch(addGun())
 store.dispatch(removeGun())
