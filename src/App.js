@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import {connect} from './diyRedux/my-react-redux.js'
 import axios from 'axios'
 
-import { counter, addGun, removeGun, addGunAsync } from './index.redux'
+import { counter, addGun, removeGun, addGunAsync,addTwice } from './index.redux'
 import logo from './logo.svg';
 import './App.css';
 
 const mapStatetoProps = (state)=>{
   return {num:state}
 }
-const actionCreaters = {counter, addGun, removeGun, addGunAsync}
+const actionCreaters = {counter, addGun, removeGun, addGunAsync,addTwice}
 
 // 装饰器配置失败
 // @connect(mapStatetoProps, actionCreaters)
@@ -34,6 +34,7 @@ class App extends Component {
           <button onClick={this.props.addGun}>申请武器</button>
           <button onClick={this.props.removeGun}>上交武器</button>
           <button onClick={this.props.addGunAsync}>拖两天再给</button>
+          <button onClick={this.props.addTwice}>申请两把</button>
         </header>
       </div>
     );

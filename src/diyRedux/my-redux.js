@@ -35,16 +35,29 @@ export function bindActionCreators(creators, dispatch) {
     return bound;
 }
 
-export function applyMiddleWare(middleware) {
+export function compose(...funcs) {
+    if (funcs.length == 0) {
+        return arg => arg
+    }
+    if (funcs.length == 1) {
+        return funcs[0]
+    }
+    return funcs.reduce((ret, item) => (...args) => ret(item(...args)))
+}
+
+// applyMiddleWare的作用就是将createStore重新包装一遍再次传入reducer
+export function applyMiddleWare(...middlewares) {
     return createStore => (...args) => {
         const store = createStore(...args)
         let dispatch = store.dispatch
 
         const midApi = {
-            getState: store.getState,
-            dispatch: (...args) => dispatch(...args)
-        }
-        dispatch = middleware(midApi)(store.dispatch)
+                getState: store.getState,
+                dispatch: (...args) => dispatch(...args)
+            }
+            // dispatch = middleware(midApi)(store.dispatch)
+        const middlewareChain = middlewares.map(middleware => middleware(midApi))
+        dispatch = compose(...middlewareChain)(store.dispatch)
         return {
             ...store,
             dispatch

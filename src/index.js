@@ -9,9 +9,10 @@ import * as serviceWorker from './serviceWorker';
 import {createStore, applyMiddleWare} from './diyRedux/my-redux.js'
 // import thunk from 'redux-thunk'
 import thunk from './diyRedux/my-redux-thunk.js'
+import arrThunk from './diyRedux/my-redux-array.js'
 // import { Provider } from 'react-redux'
 import { Provider } from './diyRedux/my-react-redux.js'
-// import { addGun, removeGun, addGunAsync } from './index.redux'
+import { addGun, removeGun, addGunAsync,addTwice} from './index.redux'
 import { counter } from './index.redux'
 import './config'
 
@@ -19,7 +20,7 @@ import './config'
 //     applyMiddleware(thunk),
 //     window.devToolsExtension ? window.devToolsExtension() : f => f
 // ))
-const store = createStore(counter,applyMiddleWare(thunk))
+const store = createStore(counter,applyMiddleWare(thunk,arrThunk))
 
 // 1.react 原始代码
 
