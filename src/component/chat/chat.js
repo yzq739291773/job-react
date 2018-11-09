@@ -79,7 +79,7 @@ class Chat extends React.Component{
 				{chatmsgs.map(v=>{
 					const avatar = require(`../img/${users[v.from].avatar}.png`)
 					return v.from===userid?(
-						<List style={{padding:'45 0'}} key={v._id}>
+						<List key={v._id}>
 							<Item
 								thumb={avatar}
 							>{v.content}</Item>
