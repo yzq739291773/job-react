@@ -65,6 +65,7 @@ export function login({ user, pwd }) {
                 console.log(111, res)
                 if (res.status === 200 && res.data.code === 0) {
                     console.log('登录成功')
+                    sessionStorage.setItem('token',res.data.token)
                     dispatch(authSuccess(res.data.data))
                 } else {
                     console.log('登录失败')

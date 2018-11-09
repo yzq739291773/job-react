@@ -6,7 +6,9 @@ const utils = require('utility')
 const _filter = { 'pwd': 0, '__v': 0 }
 
 exports.getUserInfo = async(ctx, next) => {
-    const userid = ctx.cookies.get('userid')
+    console.log('头部信息',ctx.request.header.token)
+    // const userid = ctx.cookies.get('userid')
+    const userid = ctx.request.header.token
     if (!userid) {
         ctx.body = {
             code: 1,
@@ -30,7 +32,8 @@ exports.getUserInfo = async(ctx, next) => {
 
 }
 exports.update = async(ctx, next)=>{
-    const userid = ctx.cookies.get('userid')
+    // const userid = ctx.cookies.get('userid')
+    const userid = ctx.request.header.token
     if (!userid) {
 		ctx.body = {
             code: 1,
@@ -51,10 +54,8 @@ const findone = (model, obj) => {
     return new Promise((resolve, reject) => {
         model.findOne(obj, (err, doc) => {
             if (doc) {
-                // console.log(2, doc)
                 resolve(doc)
             } else {
-                // console.log(1, err)
                 reject(err)
             }
         })
@@ -65,13 +66,14 @@ exports.login = async(ctx, next) => {
     const { user, pwd } = ctx.request.body
     try {
         let res = await findone(User,{ user, pwd: md5pwd(pwd) })
-        console.log('degnlu 1')
+        console.log('sdfsdsf',res)
+        // ctx.cookies.set('userid', res._id,{maxAge:2*3600*1000})
         ctx.body={
             code:0,
-            data:res
+            data:res,
+            token:res._id
         }
     } catch (error) {
-        console.log('denglu 2')
         ctx.body={
             code:1,
             data:error
@@ -135,7 +137,8 @@ exports.getList = async(ctx, next) => {
 
 exports.getmsglist = async (ctx,next)=>{
     console.log('getmsglist')
-    const user = ctx.cookies.get('userid')
+    // const user = ctx.cookies.get('userid')
+    const user = ctx.request.header.token
     try {
         let users = {}
         let userdoc = await tool.find(User,{})
@@ -144,6 +147,7 @@ exports.getmsglist = async (ctx,next)=>{
 			users[v._id] = {name:v.user, avatar:v.avatar}
         })
         let doc = await tool.find(Chat,{'$or':[{from:user},{to:user}]})
+        console.log('获取聊天信息',doc)
         ctx.body = {
             code: 0,
             msgs:doc,
@@ -160,7 +164,8 @@ exports.getmsglist = async (ctx,next)=>{
 
 exports.readmsg = async (ctx, next)=>{
     console.log('readmsg')
-    const userid = ctx.cookies.get('userid')
+    // const userid = ctx.cookies.get('userid')
+    const userid = ctx.request.header.token
 	const {from} = ctx.request.body
 	await Chat.update(
 		{from,to:userid},
