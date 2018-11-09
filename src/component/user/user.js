@@ -1,31 +1,31 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Result, List,Brief,WhiteSpace,Modal, Button} from 'antd-mobile'
+import {Result, List,WhiteSpace,Modal, Button} from 'antd-mobile'
 import reactCookie from 'react-cookies'
 import {logoutSubmit} from '../../redux/user.redux'
 
 const mapStatetoProps = (state)=>{
     return {user:state.user}
 }
-var setCookie = function (name, value, day) {
-	       if(day !== 0){     //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
-	         var expires = day * 24 * 60 * 60 * 1000;
-            var date = new Date(+new Date()+expires);
-           document.cookie = name + "=" + escape(value) + ";expires=" + date.toUTCString();
-          }else{
-            document.cookie = name + "=" + escape(value);
-         }
-	   };
-	   var delCookie = function (name) {
-		       console.log(5555)
-		       setCookie(name, ' ', -1);
-		     };  
+// var setCookie = function (name, value, day) {
+// 	       if(day !== 0){     //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+// 	         var expires = day * 24 * 60 * 60 * 1000;
+//             var date = new Date(+new Date()+expires);
+//            document.cookie = name + "=" + escape(value) + ";expires=" + date.toUTCString();
+//           }else{
+//             document.cookie = name + "=" + escape(value);
+//          }
+// 	   };
+	//    var delCookie = function (name) {
+	// 	       console.log(5555)
+	// 	       setCookie(name, ' ', -1);
+	// 	     };  
 const actionCreaters = {logoutSubmit}
 class User extends React.Component{
-	constructor(props){
-		super(props)
+	// constructor(props){
+	// 	super(props)
 
-	}
+	// }
 	logout(){
 		console.log('注销')
 		const alert = Modal.alert
@@ -51,7 +51,7 @@ class User extends React.Component{
 				<Result
 					img={<img src={require(`../img/${props.user.avatar}.png`)} style={{width:50}} alt="" />}
 					title={props.user.user}
-					message={props.user.type=='boss'?props.user.company:null}
+					message={props.user.type==='boss'?props.user.company:null}
 				/>
 				
 				<List renderHeader={()=>'简介'}>
