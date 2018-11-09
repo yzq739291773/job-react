@@ -60,9 +60,12 @@ class Chat extends React.Component{
         console.log(0,this.props.state)
 		const chatid = getChatId(userid, this.props.state.user._id)
 		const chatmsgs = this.props.state.chat.chatmsg.filter(v=>v.chatid===chatid)
+		const headstyle = {position:"fixed",left:0,top:0,width:'100%',zIndex:999}
+		// const headstyle = {}
 		return (
 			<div id='chat-page'>
 				<NavBar
+					style={headstyle}
 					mode='dark'
 					icon={<Icon type="left" />}
 					onLeftClick={()=>{
@@ -76,7 +79,7 @@ class Chat extends React.Component{
 				{chatmsgs.map(v=>{
 					const avatar = require(`../img/${users[v.from].avatar}.png`)
 					return v.from===userid?(
-						<List key={v._id}>
+						<List style={{padding:'45 0'}} key={v._id}>
 							<Item
 								thumb={avatar}
 							>{v.content}</Item>
@@ -94,7 +97,7 @@ class Chat extends React.Component{
 					
 				})}
 			
-				<div className="stick-footer">
+				<div className="stick-footer" style={{position:"fixed",bottom:0,left:0,width:'100%',zIndex:999}}>
 					
 					<List>
 						<InputItem

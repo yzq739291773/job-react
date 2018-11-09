@@ -22,6 +22,10 @@
     padding: 45px 5px;
 }
 
+#chat-page {
+    padding: 45px 0;
+}
+
 #chat-page .chat-me .am-list-extra {
     flex-basis: auto
 }
