@@ -32,9 +32,10 @@ class Login extends React.Component{
         })
     }
     render(){
+        console.log('login界面被渲染了')
         return(
             <div>
-                {this.props.user.redirectTo && this.props.user.redirectTo!== '/login'? <Redirect to={this.props.user.redirectTo} />:null}
+                {this.props.user.redirectTo && this.props.user.redirectTo!== '/login'&& this.props.user.redirectTo!== ''? <Redirect to={this.props.user.redirectTo} />:null}
                 <Logo></Logo>
                 <WingBlank>
                     <List>

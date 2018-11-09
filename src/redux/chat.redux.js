@@ -1,5 +1,6 @@
 import axios from 'axios'
 import io from 'socket.io-client'
+import API from '../config'
 const socket = io('ws://localhost:9093')
 // 获取聊天列表
 const MSG_LIST = 'MSG_LIST'
@@ -39,7 +40,7 @@ function msgRead({from,userid,num}){
 }
 export function readMsg(from){
 	return (dispatch,getState)=>{
-		axios.post('/user/readmsg',{from})
+		axios.post(API+'/user/readmsg',{from})
 			.then(res=>{
 				const userid = getState().user._id
 				if (res.status===200 && res.data.code===0) {
@@ -65,7 +66,7 @@ export function sendMsg({from ,to ,msg}){
 }
 export function getMsgList(){
 	return (dispatch,getState)=>{
-		axios.get('/user/getmsglist')
+		axios.get(API+'/user/getmsglist')
 			.then(res=>{
 				if (res.status===200 && res.data.code===0) {
 					console.log('chat redux',getState())

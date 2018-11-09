@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch,Redirect} from 'react-router-dom'
 
 import Login from './container/login/login.jsx'
 import Register from './container/register/register.jsx'
@@ -32,12 +32,12 @@ ReactDOM.render(
                 <Switch>
                 {/* <Route path='/' component={Login}></Route> */}
                 <Route path='/login' component={Login}></Route>
-                {/* <Redirect path='/' to='/login' /> */}
+                
                 <Route path='/register' component={Register}></Route>
                 <Route path='/bossinfo' component={BossInfo}></Route>
                 <Route path='/geniusinfo' component={GeniusInfo}></Route>
                 <Route path='/chat/:user' component={Chat}></Route>
-                
+                {/* <Redirect path='/' to='/login' /> */}
                 <Route  component={Dashboard}></Route>
                 {/* <Redirect from="/" to="/login" /> */}
               

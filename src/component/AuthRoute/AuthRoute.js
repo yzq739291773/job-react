@@ -8,6 +8,7 @@ const mapStatetoProps = (state) => {
     return {}
 }
 const actionCreaters = { loadData }
+const API = "http://127.0.0.1:9093/"
 class AuthRoute extends React.Component {
     // constructor(props) {
     //     super(props)
@@ -18,7 +19,7 @@ class AuthRoute extends React.Component {
         if (publicList.indexOf(pathname) > -1) {
             return null
         }
-        axios.get('/user/info')
+        axios.get(API+'user/info')
             .then((res) => {
                 console.log(res)
                 if (res.status === 200) {

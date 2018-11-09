@@ -47,24 +47,51 @@ exports.update = async(ctx, next)=>{
         ctx.body = {code:0,data}
 	})
 }
+const findone = (model, obj) => {
+    return new Promise((resolve, reject) => {
+        model.findOne(obj, (err, doc) => {
+            if (doc) {
+                // console.log(2, doc)
+                resolve(doc)
+            } else {
+                // console.log(1, err)
+                reject(err)
+            }
+        })
+    })
+}
 exports.login = async(ctx, next) => {
     console.log('登录接口')
     const { user, pwd } = ctx.request.body
-    await User.findOne({ user, pwd: md5pwd(pwd) }, _filter, function(err, doc) {
-        console.log(err, doc)
-        if (!doc) {
-            ctx.body = {
-                code: 1,
-                msg: '用户名或者密码错误'
-            }
-        } else {
-            ctx.cookies.set('userid', doc._id,{maxAge:2*3600*1000})
-            ctx.body = {
-                code: 0,
-                data: doc
-            }
+    try {
+        let res = await findone(User,{ user, pwd: md5pwd(pwd) })
+        console.log('degnlu 1')
+        ctx.body={
+            code:0,
+            data:res
         }
-    })
+    } catch (error) {
+        console.log('denglu 2')
+        ctx.body={
+            code:1,
+            data:error
+        }
+    }
+    // await User.findOne({ user, pwd: md5pwd(pwd) }, _filter, function(err, doc) {
+    //     console.log(err, doc)
+    //     if (!doc) {
+    //         ctx.body = {
+    //             code: 1,
+    //             msg: '用户名或者密码错误'
+    //         }
+    //     } else {
+    //         ctx.cookies.set('userid', doc._id,{maxAge:2*3600*1000})
+    //         ctx.body = {
+    //             code: 0,
+    //             data: doc
+    //         }
+    //     }
+    // })
 }
 exports.register = async(ctx, next) => {
 
