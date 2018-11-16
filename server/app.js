@@ -1,9 +1,11 @@
 const Koa = require('koa')
+// import Koa from 'koa'
 const app = new Koa()
 const bodyParser = require('koa-bodyparser')
 const path = require('path')
 const static = require('koa-static')
 const cors = require('koa2-cors');
+// const React  = require('react')
 
 
 const server = require('http').Server(app.callback())
@@ -14,7 +16,10 @@ const Chat = model.getModel('chat')
 const staticPath = '../build'
 
 
-
+// function App(){
+// 	return (<h2>server render</h2>)
+// }
+// console.log(App)
 // 解析请求体
 app.use(bodyParser())
 
