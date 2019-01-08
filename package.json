@@ -76,8 +76,10 @@
         "workbox-webpack-plugin": "3.6.2"
     },
     "scripts": {
-        "start": "node scripts/start.js",
-        "build": "node scripts/build.js",
+        "start": "set REACT_APP_BUILD_MODE=dev&& node scripts/start.js",
+        "build": "REACT_APP_BUILD_MODE=prod node scripts/build.js",
+        "build:test": "REACT_APP_BUILD_MODE=test node scripts/build.js",
+        "build:dev": "set REACT_APP_BUILD_MODE=dev&& node scripts/build.js",
         "test": "node scripts/test.js",
         "serve1": "nodemon server/app.js",
         "serve": "nodemon --exec babel-node -- server/app.js "
