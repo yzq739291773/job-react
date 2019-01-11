@@ -30,21 +30,11 @@ class Msg extends React.Component{
 			return b_last - a_last
 		})
 
-		// console.log([3,1,2,6,5].sort(function(a,b){
-		// 	return b-a
-		// }))
-		// console.log(Object.values({name:'imooc',age:18}))
 		// 按照聊天用户分组，根据chatid
-
-
-		// 1. eslint代码校验工具
-		// 2. react16特有的错误处理机制
-		// 2. react性能优化
 		return (
 			<div>
 				
 					{chatList.map(v=>{
-						console.log(v)
 						const lastItem = this.getLast(v)
 						// console.log(9)
 						const targetId = v[0].from===userid?v[0].to:v[0].from

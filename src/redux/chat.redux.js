@@ -1,7 +1,15 @@
 import axios from 'axios'
 import io from 'socket.io-client'
 import API from '../config'
-const socket = io('ws://localhost:9093')
+const socketDomain = {
+    dev:io('ws://192.168.29.12:9093'),
+    test:io('ws://192.168.29.9:9093'),
+    prod:io('ws://47.106.80.74:9093')
+}
+let socket = socketDomain[process.env.REACT_APP_BUILD_MODE]
+console.log('socket环境',process.env.REACT_APP_BUILD_MODE)
+console.log('socket信息',socket)
+// let socket = io('ws://localhost:9093')
 // 获取聊天列表
 const MSG_LIST = 'MSG_LIST'
 // 读取信息
