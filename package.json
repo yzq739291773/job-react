@@ -77,8 +77,8 @@
     },
     "scripts": {
         "start": "set REACT_APP_BUILD_MODE=dev&& node scripts/start.js",
-        "build": "REACT_APP_BUILD_MODE=prod node scripts/build.js",
-        "build:test": "REACT_APP_BUILD_MODE=test node scripts/build.js",
+        "build": "set REACT_APP_BUILD_MODE=prod&& node scripts/build.js",
+        "build:test": "set REACT_APP_BUILD_MODE=test&& node scripts/build.js",
         "build:dev": "set REACT_APP_BUILD_MODE=dev&& node scripts/build.js",
         "test": "node scripts/test.js",
         "serve1": "nodemon server/app.js",
