@@ -3,7 +3,7 @@ import { Toast } from 'antd-mobile'
 console.log('环境',process.env.REACT_APP_BUILD_MODE)
 // const API = "http://127.0.0.1:9093"
 const domain = {
-    dev:"http://192.168.29.12:9093",
+    dev:"http://127.0.0.1:9093",
     test:"http://192.168.29.9:9093",
     prod:"http://47.106.80.74:9093"
 }
