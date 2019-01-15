@@ -1,6 +1,13 @@
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
-const API = "http://127.0.0.1:9093"
+console.log('环境',process.env.REACT_APP_BUILD_MODE)
+// const API = "http://127.0.0.1:9093"
+const domain = {
+    dev:"http://127.0.0.1:9093",
+    test:"http://192.168.29.9:9093",
+    prod:"http://47.106.80.74:9093"
+}
+let API = domain[process.env.REACT_APP_BUILD_MODE]
 let setToken = function(config){
     var token = sessionStorage.getItem('token')
     if(token != null){
